@@ -34,7 +34,10 @@
     </v-app-bar>
 
     <v-main>
-      <h1 v-for="ponto in allPontos" :key="ponto.id">{{ ponto.id }}</h1>
+      <div v-for="ponto in allPontos" :key="ponto.id">
+        <v-chip>{{ ponto.preciso }}</v-chip>
+        <v-chip>{{ ponto.ofereco }}</v-chip>
+      </div>
     </v-main>
   </v-app>
 </template>
@@ -49,6 +52,8 @@ const PONTOS_QUERY = gql`
         latitude
         longitude
       }
+      ofereco
+      preciso
     }
   }
 `;
