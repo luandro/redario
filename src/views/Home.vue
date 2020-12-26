@@ -1,18 +1,28 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>{{ pontos }}</h1>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import gql from "graphql-tag";
+const PONTOS_QUERY = gql`
+  query {
+    allPontos {
+      id
+      localizacao
+    }
+  }
+`;
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld
+  components: {},
+  apollo: {
+    // Simple query that will update the 'hello' vue property
+    pontos: PONTOS_QUERY
   }
 };
 </script>

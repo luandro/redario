@@ -34,21 +34,32 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld />
+      <h1 v-for="ponto in allPontos" :key="ponto.id">{{ ponto.id }}</h1>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
+import gql from "graphql-tag";
+const PONTOS_QUERY = gql`
+  query {
+    allPontos {
+      id
+      localizacao {
+        latitude
+        longitude
+      }
+    }
+  }
+`;
 export default {
   name: "App",
 
-  components: {
-    HelloWorld
+  components: {},
+  apollo: {
+    // Simple query that will update the 'hello' vue property
+    allPontos: PONTOS_QUERY
   },
-
   data: () => ({
     //
   })
