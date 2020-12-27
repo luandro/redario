@@ -34,20 +34,19 @@
     </v-app-bar>
 
     <v-main>
-      <div v-for="ponto in allPontos" :key="ponto.id">
-        <v-chip>{{ ponto.preciso }}</v-chip>
-        <v-chip>{{ ponto.ofereco }}</v-chip>
-      </div>
+      <Map :markers="markers" height="93vh" />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import gql from "graphql-tag";
+import Map from "@/components/Map.vue";
 const PONTOS_QUERY = gql`
   query {
     allPontos {
       id
+      nome
       localizacao {
         latitude
         longitude
@@ -60,13 +59,24 @@ const PONTOS_QUERY = gql`
 export default {
   name: "App",
 
-  components: {},
+  components: {
+    Map
+  },
   apollo: {
     // Simple query that will update the 'hello' vue property
     allPontos: PONTOS_QUERY
   },
-  data: () => ({
-    //
-  })
+  computed: {
+    markers() {
+      if (this.allPontos) {
+        return this.allPontos.map(ponto => {
+          return {
+            coords: [ponto.localizacao.longitude, ponto.localizacao.latitude],
+            ...ponto
+          };
+        });
+      } else return [];
+    }
+  }
 };
 </script>
