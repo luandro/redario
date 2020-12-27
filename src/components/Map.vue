@@ -17,13 +17,15 @@
       >
         <div slot="marker" class="marker">
           <span>
-            <v-icon color="primary" size="22">mdi-target</v-icon>
+            <v-icon color="primary" size="22">mdi-office-building</v-icon>
           </span>
         </div>
         <MglPopup :offset="35" anchor="bottom" class="popup">
-          <div class="caption">
-            <h3>{{ marker.nome }}</h3>
-            <v-chip>{{ marker.preciso }}</v-chip>
+          <div class="popup">
+            <h3 class="pb-4">{{ marker.nome }}</h3>
+            <h4>Preciso</h4>
+            <v-chip class="mb-4">{{ marker.preciso }}</v-chip>
+            <h4>Ofereço</h4>
             <v-chip>{{ marker.ofereco }}</v-chip>
           </div>
         </MglPopup>
@@ -130,15 +132,7 @@ map {
 }
 .popup {
   z-index: 999;
-}
-.button {
-  position: absolute;
-  bottom: 50px;
-  right: 45vw;
-  left: 45vw;
-  width: 45vw;
-}
-.z-max {
-  z-index: 99;
+  height: 200px;
+  width: 200px;
 }
 </style>
